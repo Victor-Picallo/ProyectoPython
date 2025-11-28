@@ -9,11 +9,12 @@ def create_table():
     """
     
     conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(query)
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+    finally:
+        conn.close()
     
-    conn.commit()
-    conn.close()
-    
-    if __name__ == "__main__":
-        create_table()
+if __name__ == "__main__":
+    create_table()
